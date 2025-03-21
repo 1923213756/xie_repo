@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.UserMapper">
+
+    <!-- 定义字段映射 -->
+    <resultMap id="userResultMap" type="com.example.entity.User">
+        <id property="id" column="id"/>
+        <result property="username" column="user_Name"/>   <!-- 数据库字段 user_Name → 实体类 username -->
+        <result property="password" column="user_Pwd"/>    <!-- 数据库字段 user_Pwd → 实体类 password -->
+        <result property="userType" column="user_Id"/>     <!-- 数据库字段 user_Id → 实体类 userType -->
+    </resultMap>
+
+    <!-- 插入用户 -->
+    <insert id="insertUser" parameterType="com.example.entity.User" useGeneratedKeys="true" keyProperty="id">
+             INSERT INTO user (user_Name, user_Pwd, user_Id)VALUES (#{username}, #{password}, #{userType})
+    </insert>
+
+    <select id="selectByUsername" resultType="com.example.entity.User"> SELECT * FROM user WHERE user_Name = #{username} </select>
+
+</mapper>
